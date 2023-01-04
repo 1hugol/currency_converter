@@ -1,6 +1,6 @@
 package com.hdevelopers.converter.controllers.response;
 
-public class QueryResponse {
+public class ConverterResponse {
 
     private String result;
 

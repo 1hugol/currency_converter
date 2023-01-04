@@ -1,7 +1,7 @@
 package com.hdevelopers.converter.services;
 
-import com.hdevelopers.converter.controllers.request.QueryRequest;
-import com.hdevelopers.converter.controllers.response.QueryResponse;
+import com.hdevelopers.converter.controllers.request.QueryResponse;
+import com.hdevelopers.converter.controllers.response.ConverterResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,14 @@ import java.util.Collections;
 public class ConverterService {
     @Value("${API_KEY}")
     private String API_KEY;
+    @Value("${API_URL}")
+    private String API_URL;
 
-    public QueryResponse currencyConverter(String to, String from, String amount) {
+    public ConverterResponse currencyConverter(String to, String from, String amount) {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "https://api.apilayer.com/exchangerates_data/convert?to=" + to
+        String url = API_URL + "exchangerates_data/convert?to=" + to
                 + "&from=" + from
                 + "&amount=" + amount;
 
@@ -30,29 +32,29 @@ public class ConverterService {
 
         HttpEntity headerRequest = new HttpEntity(httpHeaders);
 
-        ResponseEntity<QueryRequest> queryRequest = restTemplate.exchange(
+        ResponseEntity<QueryResponse> queryResponse = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 headerRequest,
-                QueryRequest.class
+                QueryResponse.class
         );
 
-        if (queryRequest.getStatusCode() == HttpStatus.OK) {
+        if (queryResponse.getStatusCode() == HttpStatus.OK) {
             System.out.println("Request Successful.");
-            System.out.println(queryRequest.getBody().getResult());
+            System.out.println(queryResponse.getBody().getResult());
         } else {
             System.out.println("Request Failed");
-            System.out.println(queryRequest.getStatusCode());
+            System.out.println(queryResponse.getStatusCode());
         }
 
-        QueryResponse queryResponse = currencyConverterResponse(queryRequest.getBody());
+        ConverterResponse converterResponse = currencyConverterResponse(queryResponse.getBody());
 
-        return queryResponse;
+        return converterResponse;
     }
 
-    private QueryResponse currencyConverterResponse(QueryRequest queryRequest) {
-        QueryResponse queryResponse = new QueryResponse();
-        queryResponse.setResult(queryRequest.getResult());
-        return queryResponse;
+    private ConverterResponse currencyConverterResponse(QueryResponse queryResponse) {
+        ConverterResponse converterResponse = new ConverterResponse();
+        converterResponse.setResult(queryResponse.getResult());
+        return converterResponse;
     }
 }

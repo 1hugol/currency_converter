@@ -5,7 +5,7 @@ import com.hdevelopers.converter.model.Query;
 
 import java.io.Serializable;
 
-public class QueryRequest implements Serializable {
+public class QueryResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

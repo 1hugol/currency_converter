@@ -1,6 +1,6 @@
 package com.hdevelopers.converter.controllers;
 
-import com.hdevelopers.converter.controllers.response.QueryResponse;
+import com.hdevelopers.converter.controllers.response.ConverterResponse;
 import com.hdevelopers.converter.services.ConverterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,12 @@ public class ConverterController {
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<QueryResponse> currencyConverter (
+    public ResponseEntity<ConverterResponse> currencyConverter (
             @RequestParam("to") String to,
             @RequestParam("from") String from,
             @RequestParam("amount") String amount
     ) {
-        QueryResponse queryResponse = converterService.currencyConverter(to, from, amount);
-        return ResponseEntity.ok().body(queryResponse);
+        ConverterResponse converterResponse = converterService.currencyConverter(to, from, amount);
+        return ResponseEntity.ok().body(converterResponse);
     }
 }
