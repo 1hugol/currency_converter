@@ -1,9 +1,11 @@
 package com.hdevelopers.converter.model;
 
+import com.hdevelopers.converter.enums.Currency;
+
 public class Query {
     private String amount;
-    private String from;
-    private String to;
+    private Currency from;
+    private Currency to;
 
     public String getAmount() {
         return amount;
@@ -13,19 +15,19 @@ public class Query {
         this.amount = amount;
     }
 
-    public String getFrom() {
+    public Currency getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
+    public void setFrom(Currency from) {
         this.from = from;
     }
 
-    public String getTo() {
+    public Currency getTo() {
         return to;
     }
 
-    public void setTo(String to) {
+    public void setTo(Currency to) {
         this.to = to;
     }
 }

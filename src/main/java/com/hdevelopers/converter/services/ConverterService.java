@@ -2,6 +2,7 @@ package com.hdevelopers.converter.services;
 
 import com.hdevelopers.converter.controllers.request.QueryResponse;
 import com.hdevelopers.converter.controllers.response.ConverterResponse;
+import com.hdevelopers.converter.enums.Currency;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class ConverterService {
     @Value("${API_URL}")
     private String API_URL;
 
-    public ConverterResponse currencyConverter(String to, String from, String amount) {
+    public ConverterResponse currencyConverter(Currency to, Currency from, String amount) {
 
         RestTemplate restTemplate = new RestTemplate();
 
